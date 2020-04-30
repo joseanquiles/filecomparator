@@ -1,5 +1,11 @@
 <?xml version="1.0"?>
 <filecomparator>
+	<name>sample</name>
+	<description>sample configuration file</description>
+	<source-dir>./test/original</source-dir>
+	<target-dir>./test/revised</target-dir>
+	<output-file></output-file>
+	
 	<filetypes>
 		<filetype>
 			<type>default</type>
@@ -41,4 +47,11 @@
 			</plugins>
 		</filetype>
 	</filetypes>
+	
+	<ignore-files>
+		<ignore>class</ignore>
+		<ignore>docx</ignore>
+		<ignore>doc</ignore>
+	</ignore-files>
+	
 </filecomparator>

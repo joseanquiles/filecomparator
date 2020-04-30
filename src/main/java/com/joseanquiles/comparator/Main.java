@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.github.difflib.patch.AbstractDelta;
+import com.joseanquiles.comparator.configuration.FileComparatorConfiguration;
 import com.joseanquiles.comparator.filecompare.FileComparator;
 import com.joseanquiles.comparator.plugin.ComparatorPlugin;
 import com.joseanquiles.comparator.plugin.IgnoreBlankPlugin;
@@ -23,6 +24,8 @@ public class Main {
 	public static void main(String[] args) {
 		try {
 			
+			FileComparatorConfiguration config = new FileComparatorConfiguration("src/main/resources/config.sample.xml");
+			
 			String[] ignore = new String[] {
 				"class",	
 			};
@@ -30,8 +33,8 @@ public class Main {
 			File sourceDir = new File("./test/original");
 			File revisedDir = new File("./test/revised");
 			
-			sourceDir = new File("d:\\REPOSITORIOS\\INFA\\0_AT\\model\\model-infa\\tags\\3.0.0-3-9\\");
-			revisedDir = new File("d:\\REPOSITORIOS\\INFA\\0_AT\\model\\model-infa\\tags\\4.2.0-1-2\\");
+			//sourceDir = new File("d:\\REPOSITORIOS\\INFA\\0_AT\\model\\model-infa\\tags\\3.0.0-3-9\\");
+			//revisedDir = new File("d:\\REPOSITORIOS\\INFA\\0_AT\\model\\model-infa\\tags\\4.2.0-1-2\\");
 			
 			List<File> sourceFiles = FileUtil.exploreDir(sourceDir, ignore);
 			List<File> revisedFiles = FileUtil.exploreDir(revisedDir, ignore);
