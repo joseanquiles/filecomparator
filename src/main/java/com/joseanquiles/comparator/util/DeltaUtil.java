@@ -15,6 +15,7 @@ public class DeltaUtil {
 		if (from != to) {
 			sb.append("-").append(to);
 		}
+		sb.append(" ");
 		for (int i = 0; i < delta.getSource().getLines().size(); i++) {
 			sb.append("[").append(delta.getSource().getLines().get(i)).append("] ");
 		}
@@ -26,6 +27,7 @@ public class DeltaUtil {
 		if (from != to) {
 			sb.append("-").append(to);
 		}
+		sb.append(" ");
 		for (int i = 0; i < delta.getTarget().getLines().size(); i++) {
 			sb.append("[").append(delta.getTarget().getLines().get(i)).append("] ");
 		}

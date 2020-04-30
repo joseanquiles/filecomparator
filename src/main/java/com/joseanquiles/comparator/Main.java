@@ -12,6 +12,7 @@ import com.joseanquiles.comparator.plugin.ComparatorPlugin;
 import com.joseanquiles.comparator.plugin.IgnoreBlankPlugin;
 import com.joseanquiles.comparator.plugin.IgnoreMultilineCommentsPlugin;
 import com.joseanquiles.comparator.plugin.IgnoreRegularExpressionPlugin;
+import com.joseanquiles.comparator.plugin.IgnoreSingleLineCommentsPlugin;
 import com.joseanquiles.comparator.util.DeltaUtil;
 import com.joseanquiles.comparator.util.FileUtil;
 
@@ -24,12 +25,9 @@ public class Main {
 			String[] ignore = new String[] {
 				"class",	
 			};
-			
-			//File sourceDir = new File("d:\\REPOSITORIOS\\INFA\\0_AT\\dao\\dao-SPMessage\\tags\\4.8.0-1-1\\");
-			//File revisedDir = new File("d:\\REPOSITORIOS\\INFA\\1_CO\\dao\\dao-SPMessage\\branches\\v4.8.0_PESP_2007_v1\\");
-			
-			File sourceDir = new File("d:\\REPOSITORIOS\\INFA\\0_AT\\cgt-node\\cgt-FindSPMessageVerification\\tags\\4.0.0-1-1\\");
-			File revisedDir = new File("d:\\REPOSITORIOS\\INFA\\1_CO\\cgt-node\\cgt-FindSPMessageVerification\\branches\\v4.0.0_PESP_2007_v1\\");
+						
+			File sourceDir = new File("./test/original");
+			File revisedDir = new File("./test/revised");
 			
 			List<File> sourceFiles = FileUtil.exploreDir(sourceDir, ignore);
 			List<File> revisedFiles = FileUtil.exploreDir(revisedDir, ignore);
@@ -71,18 +69,23 @@ public class Main {
 			}
 
 			// STEP 3: files in both, source and revised
+			System.out.println("===============================================================");
+			System.out.println("MODIFIED FILES:");
 			for (int i = 0; i < common1.size(); i++) {
 				List<ComparatorPlugin> pluginList = new ArrayList<ComparatorPlugin>();
 				
-				pluginList.add(new IgnoreBlankPlugin());
-				
 				Map<String, String> params1 = new HashMap<String, String>();
-				params1.put("regexp", ".*informaci.*|.*Buscar.*");
+				params1.put("regexp", "^@Generated\\(.*");
 				ComparatorPlugin p1 = new IgnoreRegularExpressionPlugin();
 				p1.setParameters(params1);
 				pluginList.add(p1);
 				
 				pluginList.add(new IgnoreMultilineCommentsPlugin());
+
+				pluginList.add(new IgnoreSingleLineCommentsPlugin());
+
+				pluginList.add(new IgnoreBlankPlugin());
+				
 				
 				FileComparator fc = new FileComparator(common1.get(i), common2.get(i));
 				List<AbstractDelta<String>> deltas = fc.compare(pluginList);
@@ -96,6 +99,8 @@ public class Main {
 					}
 				}
 			}
+			
+			System.out.println("===============================================================");
 						
 		} catch (Exception e) {
 			e.printStackTrace();

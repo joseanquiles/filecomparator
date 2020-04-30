@@ -8,7 +8,8 @@ import com.joseanquiles.comparator.Line;
 
 public class IgnoreSingleLineCommentsPlugin implements ComparatorPlugin {
 
-	private static final String REGEX = "//.*?\\n\",\"\\n";
+	//private static final String REGEX = "//.*?\\n\",\"\\n";
+	private static final String REGEX = "//.*";
 	
 	public void setParameters(Map<String, String> params) {
 		// nothing to do

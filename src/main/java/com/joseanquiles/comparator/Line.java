@@ -13,6 +13,10 @@ public class Line {
 	public int getLinenumber() {
 		return linenumber;
 	}
+	
+	public void setLineNumber(int linenumber) {
+		this.linenumber = linenumber;
+	}
 
 	public String getLine() {
 		return line;

@@ -28,6 +28,19 @@ public class IgnoreMultilineCommentsPlugin implements ComparatorPlugin {
 			Line line = new Line(i+1, splitted[i]);
 			processed.add(line);
 		}
+		// synchronize line numbers
+		int current = 0;
+		for (int i = 0; i < processed.size(); i++) {
+			Line proc = processed.get(i);
+			for (int j = current; j < lines.size(); j++) {
+				Line orig = lines.get(j);
+				if (orig.getLine().startsWith(proc.getLine())) {
+					proc.setLineNumber(orig.getLinenumber());
+					current = j;
+					break;
+				}
+			}
+		}
 		return processed;
 	}
 	

@@ -28,5 +28,10 @@ public class IgnoreRegularExpressionPlugin implements ComparatorPlugin {
 		}
 		return processed;
 	}
+	
+	public static void main(String[] args) {
+		String line = "@Generated(value = \"EclipseLink-2.5.2.v20140319-rNA\", date = \"2020-04-22T15:33:18\")"; 
+		System.out.println(line.matches("^@Generated\\(.*"));
+	}
 
 }
