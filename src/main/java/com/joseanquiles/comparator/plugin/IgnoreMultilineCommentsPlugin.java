@@ -30,51 +30,5 @@ public class IgnoreMultilineCommentsPlugin implements ComparatorPlugin {
 		}
 		return processed;
 	}
-
-	public static void main(String[] args) {
-		String regexp = "(?s)/\\*.*?\\*/";
-		String java =
-				"package com.telefonica.infa.dao.spmessage.repository;\r\n" + 
-				"\r\n" + 
-				"import com.telefonica.infa.model.SpisaEntSpecCharUse;\r\n" + 
-				"import javax.persistence.criteria.CriteriaBuilder;\r\n" + 
-				"import javax.persistence.criteria.CriteriaQuery;\r\n" + 
-				"import javax.persistence.criteria.Predicate;\r\n" + 
-				"import javax.persistence.criteria.Root;\r\n" + 
-				"import org.springframework.data.jpa.domain.Specification;\r\n" + 
-				"\r\n" + 
-				"public class FindEntSpecCharUse {\r\n" + 
-				"\r\n" + 
-				"    /*\r\n" + 
-				"     * busca por el name de la EntitySpecCharUse\r\n" + 
-				"     */\r\n" + 
-				"\r\n" + 
-				"    public static Specification<SpisaEntSpecCharUse> byName(String escuNaEntSpecCharUse) {\r\n" + 
-				"        return new Specification<SpisaEntSpecCharUse>() {\r\n" + 
-				"            @Override\r\n" + 
-				"            public Predicate toPredicate(Root<SpisaEntSpecCharUse> root, CriteriaQuery<?> query, CriteriaBuilder cb) {\r\n" + 
-				"                return null;\r\n" + 
-				"            }\r\n" + 
-				"        };\r\n" + 
-				"    }\r\n" + 
-				"\r\n" + 
-				"    /*\r\n" + 
-				"     * Filtra por id de SPMessageSpec asociado\r\n" + 
-				"     */\r\n" + 
-				"\r\n" + 
-				"    public static Specification<SpisaEntSpecCharUse> bySPMessageSpec(Long roenIdSpMessageSpec) {\r\n" + 
-				"        return new Specification<SpisaEntSpecCharUse>() {\r\n" + 
-				"            @Override\r\n" + 
-				"            public Predicate toPredicate(Root<SpisaEntSpecCharUse> root, CriteriaQuery<?> query, CriteriaBuilder cb) {\r\n" + 
-				"                return null;\r\n" + 
-				"            }\r\n" + 
-				"        };\r\n" + 
-				"    }\r\n" + 
-				"}\r\n" + 
-				"";
-		String cleanJava = java.replaceAll(regexp, "");
-		System.out.println(cleanJava);
-		
-	}
 	
 }
