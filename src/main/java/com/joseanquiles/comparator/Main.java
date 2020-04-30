@@ -13,6 +13,7 @@ import com.joseanquiles.comparator.plugin.IgnoreBlankPlugin;
 import com.joseanquiles.comparator.plugin.IgnoreMultilineCommentsPlugin;
 import com.joseanquiles.comparator.plugin.IgnoreRegularExpressionPlugin;
 import com.joseanquiles.comparator.plugin.IgnoreSingleLineCommentsPlugin;
+import com.joseanquiles.comparator.plugin.IgnoreXmlCommentsPlugin;
 import com.joseanquiles.comparator.util.DeltaUtil;
 import com.joseanquiles.comparator.util.FileUtil;
 
@@ -81,6 +82,8 @@ public class Main {
 				pluginList.add(p1);
 				
 				pluginList.add(new IgnoreMultilineCommentsPlugin());
+
+				pluginList.add(new IgnoreXmlCommentsPlugin());
 
 				pluginList.add(new IgnoreSingleLineCommentsPlugin());
 
