@@ -30,6 +30,9 @@ public class Main {
 			File sourceDir = new File("./test/original");
 			File revisedDir = new File("./test/revised");
 			
+			sourceDir = new File("d:\\REPOSITORIOS\\INFA\\0_AT\\model\\model-infa\\tags\\3.0.0-3-9\\");
+			revisedDir = new File("d:\\REPOSITORIOS\\INFA\\0_AT\\model\\model-infa\\tags\\4.2.0-1-2\\");
+			
 			List<File> sourceFiles = FileUtil.exploreDir(sourceDir, ignore);
 			List<File> revisedFiles = FileUtil.exploreDir(revisedDir, ignore);
 			
