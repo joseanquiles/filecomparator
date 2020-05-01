@@ -24,7 +24,7 @@ public class Main {
 	public static void main(String[] args) {
 		try {
 			
-			FileComparatorConfiguration config = new FileComparatorConfiguration("src/main/resources/config.sample.xml");
+			FileComparatorConfiguration config = new FileComparatorConfiguration("src/main/resources/config.sample.yaml");
 			
 			String[] ignore = new String[] {
 				"class",	

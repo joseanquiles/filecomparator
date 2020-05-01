@@ -1,2 +1,2 @@
 # filecomparator
-Comparador de ficheros con plugins
+File comparator with plugins
