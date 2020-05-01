@@ -1,0 +1,28 @@
+name: sample
+description: sample config file
+source-dir: ./test/original
+target-dir: ./test/revised
+output-file:
+ignore-files:
+- class
+- docx
+- doc
+file-types:
+- extensions:
+  - default
+- extensions:
+  - java
+  plugins:
+  - name: IgnoreRegularExpressionPlugin
+    params:
+    - name: regexp
+    - value: ^@Generated\(.*
+  - name: IgnoreMultilineCommentsPlugin
+  - name: IgnoreSingleLineCommentsPlugin
+  - name: IgnoreBlankPlugin
+- extensions:
+  - xml
+  - html
+  plugins:
+  - name: IgnoreXmlCommentsPlugin
+  - name: IgnoreBlankPlugin
