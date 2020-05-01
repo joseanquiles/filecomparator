@@ -14,15 +14,21 @@ file-types:
   - java
   plugins:
   - name: IgnoreRegularExpressionPlugin
-    params:
+    enabled: true
+    parameters:
     - name: regexp
-    - value: ^@Generated\(.*
+      value: ^@Generated\(.*
   - name: IgnoreMultilineCommentsPlugin
+    enabled: true
   - name: IgnoreSingleLineCommentsPlugin
+    enabled: true
   - name: IgnoreBlankPlugin
+    enabled: true
 - extensions:
   - xml
   - html
   plugins:
   - name: IgnoreXmlCommentsPlugin
+    enabled: true
   - name: IgnoreBlankPlugin
+    enabled: true

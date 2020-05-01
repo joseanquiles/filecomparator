@@ -5,7 +5,7 @@ import java.util.List;
 
 class FileTypeConfiguration {
 
-	List<String> types = new ArrayList<>();
+	List<String> extensions = new ArrayList<>();
 	
 	List<PluginConfiguration> plugins = new ArrayList<>();
 	

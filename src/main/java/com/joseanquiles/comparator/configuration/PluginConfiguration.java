@@ -7,6 +7,8 @@ class PluginConfiguration {
 
 	String pluginName = null;
 	
+	boolean enabled = true;
+	
 	Map<String, String> parameters = new HashMap<>();
 	
 }
