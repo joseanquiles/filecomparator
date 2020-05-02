@@ -66,7 +66,8 @@ public class FileUtil {
 					exploreDirInternal(files[i], fileList, ignore);
 				}
 			}
-		} else {
+		} else if (dir.exists()) {
+			fileList.add(dir);
 			return;
 		}
 	}

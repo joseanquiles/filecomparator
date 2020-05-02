@@ -5,9 +5,9 @@
 # project name and description (optional)
 name: sample
 description: sample config file
-# source and target directories (mandatory)
-source-dir: ./test/original
-target-dir: ./test/revised
+# source and target directories or files (mandatory)
+source: ./test/original
+target: ./test/revised
 
 # report output file (optional)
 output-file:

@@ -17,8 +17,8 @@ public class FileComparatorConfiguration {
 
 	String name = "";
 	String description = "";
-	String sourceDir = "";
-	String targetDir = "";
+	String source = "";
+	String target = "";
 	String outputFile = null;
 	List<String> ignoreTypes = new ArrayList<>();
 	List<FileTypeConfiguration> fileTypes = new ArrayList<>();
@@ -31,12 +31,12 @@ public class FileComparatorConfiguration {
 		return this.description;
 	}
 	
-	public String getSourceDir() {
-		return this.sourceDir;
+	public String getSource() {
+		return this.source;
 	}
 	
-	public String getTargetDir() {
-		return this.targetDir;
+	public String getTarget() {
+		return this.target;
 	}
 	
 	public String getOutputFile() {
@@ -117,14 +117,14 @@ public class FileComparatorConfiguration {
 		
 		this.name = (String)yamlMap.get("name");
 		this.description = (String)yamlMap.get("description");
-		this.sourceDir = (String)yamlMap.get("source-dir");
-		this.targetDir = (String)yamlMap.get("target-dir");
+		this.source = (String)yamlMap.get("source");
+		this.target = (String)yamlMap.get("target");
 		this.outputFile = (String)yamlMap.get("output-file");
 
-		if (this.sourceDir == null) {
+		if (this.source == null) {
 			throw new Exception("source-dir is mandatory");
 		}
-		if (this.targetDir == null) {
+		if (this.target == null) {
 			throw new Exception("target-dir is mandatory");
 		}
 
