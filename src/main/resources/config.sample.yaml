@@ -1,15 +1,31 @@
+#
+# SAMPLE FILE
+#
+
+# project name and description (optional)
 name: sample
 description: sample config file
+# source and target directories (mandatory)
 source-dir: ./test/original
 target-dir: ./test/revised
+
+# report output file (optional)
 output-file:
+
+# list of ignored files (file extension)
 ignore-files:
 - class
 - docx
 - doc
+
+# configuration for every file type
 file-types:
+
+# default configuration
 - extensions:
-  - default
+  - default-conf
+
+# java plugins
 - extensions:
   - java
   plugins:
@@ -24,6 +40,8 @@ file-types:
     enabled: true
   - name: IgnoreBlankPlugin
     enabled: true
+
+# xml and html plugins
 - extensions:
   - xml
   - html

@@ -34,7 +34,7 @@ public class FileUtil {
 		}
 	}
 	
-	public static List<File> exploreDir(File baseDir, String[] ignore) {
+	public static List<File> exploreDir(File baseDir, List<String> ignore) {
 		List<File> fileList = new ArrayList<File>();
 		exploreDirInternal(baseDir, fileList, ignore);
 		return fileList;
@@ -47,16 +47,16 @@ public class FileUtil {
 		return new File(fn.replace(bf, bt));
 	}
 	
-	private static boolean ignoreFile(File file, String[] ignore) {
-		for (int i = 0; i < ignore.length; i++) {
-			if (file.getName().endsWith(ignore[i])) {
+	private static boolean ignoreFile(File file, List<String> ignore) {
+		for (int i = 0; i < ignore.size(); i++) {
+			if (file.getName().endsWith(ignore.get(i))) {
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	private static void exploreDirInternal(File dir, List<File> fileList, String[] ignore) {
+	private static void exploreDirInternal(File dir, List<File> fileList, List<String> ignore) {
 		if (dir.isDirectory()) {
 			File[] files = dir.listFiles();
 			for (int i = 0;i < files.length; i++) {
@@ -68,16 +68,6 @@ public class FileUtil {
 			}
 		} else {
 			return;
-		}
-	}
-	
-	public static void main(String[] args) {
-		File baseDir = new File("./src");
-		List<File> files = exploreDir(baseDir, new String[0]);
-		for (int i = 0; i < files.size(); i++) {
-			System.out.println(files.get(i));
-			System.out.println(transformBasePath(baseDir, new File("./other"), files.get(i)));
-			System.out.println("-----------------------------------");
 		}
 	}
 	
