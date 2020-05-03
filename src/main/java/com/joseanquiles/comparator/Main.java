@@ -17,12 +17,12 @@ public class Main {
 
 	
 	private static void printSyntax() {
-		System.out.println(Main.class.getName() + " -h -c config-file -s source -t target -o output");
+		System.out.println(Main.class.getName() + " [-h] -c config-file [-s source] [-t target] [-o output]");
 		System.out.println("    -h : show this help");
-		System.out.println("    -c : configuration file (default src/main/resources/config.sample.yaml)");
-		System.out.println("    -s : source directory or file");
-		System.out.println("    -t : target directory or file");
-		System.out.println("    -o : output file (default console)");
+		System.out.println("    -c : configuration file (mandatory)");
+		System.out.println("    -s : source directory or file (overwrite config file)");
+		System.out.println("    -t : target directory or file (overwrite config file)");
+		System.out.println("    -o : output file (default console, overwrite config file)");
 	}
 	
 	public static void main(String[] args) {
@@ -35,8 +35,10 @@ public class Main {
 			}
 			
 			String configFile = "src/main/resources/config.sample.yaml";
-			if (argsMap.containsKey("c")) {
-				configFile = argsMap.get("c");
+			if (!argsMap.containsKey("c")) {
+				System.err.println("-c argument is mandatory");
+				printSyntax();
+				System.exit(1);
 			}
 			
 			FileComparatorConfiguration config = new FileComparatorConfiguration(configFile);

@@ -1,0 +1,46 @@
+name: test01
+description: test01 config file
+source: src/test/resources/original
+target: src/test/resources/revised
+
+# report output file (optional)
+output-file:
+
+# list of ignored files (file extension)
+ignore-files:
+- class
+- docx
+- doc
+
+# configuration for every file type
+file-types:
+
+# default configuration
+- extensions:
+  - default-conf
+
+# java plugins
+- extensions:
+  - java
+  plugins:
+  - name: IgnoreRegularExpressionPlugin
+    enabled: true
+    parameters:
+    - name: regexp
+      value: ^@Generated\(.*
+  - name: IgnoreMultilineCommentsPlugin
+    enabled: true
+  - name: IgnoreSingleLineCommentsPlugin
+    enabled: true
+  - name: IgnoreBlankPlugin
+    enabled: true
+
+# xml and html plugins
+- extensions:
+  - xml
+  - html
+  plugins:
+  - name: IgnoreXmlCommentsPlugin
+    enabled: true
+  - name: IgnoreBlankPlugin
+    enabled: true
