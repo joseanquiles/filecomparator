@@ -75,5 +75,10 @@ public class FileComparatorConfigurationTest {
 		assertEquals(2, plugins.size());
 	}
 
+	@Test
+	public void getPluginsForFileDataTest() throws Exception {
+		List<ComparatorPlugin> plugins = config.getPluginsForFile(new File("test.data"));
+		assertEquals(0, plugins.size());
+	}
 
 }
