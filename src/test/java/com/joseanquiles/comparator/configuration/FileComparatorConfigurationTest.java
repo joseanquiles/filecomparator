@@ -55,12 +55,12 @@ public class FileComparatorConfigurationTest {
 	
 	@Test
 	public void ignoreFilesTest() {
-		assertEquals(3, config.getIgnoreTypes().size());
+		assertEquals(3, config.getIgnoreFiles().size());
 		List<String> ignored = new ArrayList<String>();
 		ignored.add("class");
 		ignored.add("docx");
 		ignored.add("doc");
-		assertEquals(ignored, config.getIgnoreTypes());
+		assertEquals(ignored, config.getIgnoreFiles());
 	}
 	
 	@Test

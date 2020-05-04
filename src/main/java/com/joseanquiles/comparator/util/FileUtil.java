@@ -34,9 +34,14 @@ public class FileUtil {
 		}
 	}
 	
-	public static List<File> exploreDir(File baseDir, List<String> ignore) {
+	public static List<File> exploreDir(File baseDir, List<String> ignoreFiles, List<String> ignoreDirs) {
 		List<File> fileList = new ArrayList<File>();
-		exploreDirInternal(baseDir, fileList, ignore);
+		List<String> ignoreAbsoluteDirs = new ArrayList<>();
+		for (int i = 0; i < ignoreDirs.size(); i++) {
+			String d = baseDir.getAbsolutePath() + "/" + ignoreDirs.get(i);
+			ignoreAbsoluteDirs.add(d);
+		}
+		exploreDirInternal(baseDir, fileList, ignoreFiles, ignoreAbsoluteDirs);
 		return fileList;
 	}
 	
@@ -47,23 +52,35 @@ public class FileUtil {
 		return new File(fn.replace(bf, bt));
 	}
 	
-	private static boolean ignoreFile(File file, List<String> ignore) {
-		for (int i = 0; i < ignore.size(); i++) {
-			if (file.getName().endsWith(ignore.get(i))) {
+	private static boolean ignoreFile(File file, List<String> ignoreFiles) {
+		for (int i = 0; i < ignoreFiles.size(); i++) {
+			if (file.getName().endsWith(ignoreFiles.get(i))) {
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	private static void exploreDirInternal(File dir, List<File> fileList, List<String> ignore) {
+	private static void exploreDirInternal(File dir, List<File> fileList, List<String> ignoreFiles, List<String> ignoreDirs) {
 		if (dir.isDirectory()) {
+			// check ignored dirs
+			for (int i = 0; i < ignoreDirs.size(); i++) {
+				File df = new File(ignoreDirs.get(i));
+				try {
+					if (dir.getCanonicalPath().equals(df.getCanonicalPath())) {
+						//System.out.println("*** IGNORE ***" + dir);
+						return;
+					}					
+				} catch (Exception e) {
+					// ignore
+				}
+			}
 			File[] files = dir.listFiles();
 			for (int i = 0;i < files.length; i++) {
-				if (files[i].isFile() && !ignoreFile(files[i], ignore)) {
+				if (files[i].isFile() && !ignoreFile(files[i], ignoreFiles)) {
 					fileList.add(files[i]);
 				} else if (files[i].isDirectory()) {
-					exploreDirInternal(files[i], fileList, ignore);
+					exploreDirInternal(files[i], fileList, ignoreFiles, ignoreDirs);
 				}
 			}
 		} else if (dir.exists()) {

@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.scanner.ScannerException;
 
 import com.joseanquiles.comparator.plugin.ComparatorPlugin;
 import com.joseanquiles.comparator.util.FileUtil;
@@ -20,7 +19,8 @@ public class FileComparatorConfiguration {
 	String source = "";
 	String target = "";
 	String outputFile = null;
-	List<String> ignoreTypes = new ArrayList<>();
+	List<String> ignoreFiles = new ArrayList<>();
+	List<String> ignoreDirs = new ArrayList<>();
 	List<FileTypeConfiguration> fileTypes = new ArrayList<>();
 	
 	public String getName() {
@@ -43,10 +43,14 @@ public class FileComparatorConfiguration {
 		return this.outputFile;
 	}
 	
-	public List<String> getIgnoreTypes() {
-		return this.ignoreTypes;
+	public List<String> getIgnoreFiles() {
+		return this.ignoreFiles;
 	}
-	
+
+	public List<String> getIgnoreDirs() {
+		return this.ignoreDirs;
+	}
+
 	public List<ComparatorPlugin> getPluginsForFile(File file) throws Exception {
 		FileTypeConfiguration ftc = matchFileType(file);
 		List<ComparatorPlugin> result = new ArrayList<>();
@@ -109,8 +113,8 @@ public class FileComparatorConfiguration {
 		Map<String, Object> yamlMap = null;
 		try {
 			yamlMap = (Map<String, Object>)yaml.load(fis);			
-		} catch (ScannerException e) {
-			throw new Exception("Error parsing configuration file: " + configFile + " : " + e.getMessage());
+		} catch (Exception e) {
+			throw new Exception("Error parsing configuration file: " + configFile + " : " + e.getMessage(), e);
 		} finally {
 			fis.close();
 		}
@@ -122,17 +126,22 @@ public class FileComparatorConfiguration {
 		this.outputFile = (String)yamlMap.get("output-file");
 
 		if (this.source == null) {
-			throw new Exception("source-dir is mandatory");
+			throw new Exception("source is mandatory");
 		}
 		if (this.target == null) {
-			throw new Exception("target-dir is mandatory");
+			throw new Exception("target is mandatory");
 		}
 
 		List<Object> ignoreList = (List<Object>)yamlMap.get("ignore-files");
 		for (int i = 0; i < ignoreList.size(); i++) {
-			this.ignoreTypes.add((String)ignoreList.get(i));
+			this.ignoreFiles.add((String)ignoreList.get(i));
 		}
-		
+
+		List<Object> ignoreDirsList = (List<Object>)yamlMap.get("ignore-dirs");
+		for (int i = 0; i < ignoreDirsList.size(); i++) {
+			this.ignoreDirs.add((String)ignoreDirsList.get(i));
+		}
+
 		List<Object> filetypesList = (List<Object>)yamlMap.get("file-types");
 		for (int i = 0; i < filetypesList.size(); i++) {
 			FileTypeConfiguration ftc = new FileTypeConfiguration();

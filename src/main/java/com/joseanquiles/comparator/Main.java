@@ -34,11 +34,13 @@ public class Main {
 				printSyntax();
 			}
 			
-			String configFile = "src/main/resources/config.sample.yaml";
+			String configFile = null;
 			if (!argsMap.containsKey("c")) {
 				System.err.println("-c argument is mandatory");
 				printSyntax();
 				System.exit(1);
+			} else {
+				configFile = argsMap.get("c");
 			}
 			
 			FileComparatorConfiguration config = new FileComparatorConfiguration(configFile);
@@ -57,8 +59,12 @@ public class Main {
 				revised = new File(config.getTarget());
 			}
 			
-			List<File> sourceFiles = FileUtil.exploreDir(source, config.getIgnoreTypes());
-			List<File> revisedFiles = FileUtil.exploreDir(revised, config.getIgnoreTypes());
+			System.out.println("Comparing:");
+			System.out.println(source);
+			System.out.println(revised);
+			
+			List<File> sourceFiles = FileUtil.exploreDir(source, config.getIgnoreFiles(), config.getIgnoreDirs());
+			List<File> revisedFiles = FileUtil.exploreDir(revised, config.getIgnoreFiles(), config.getIgnoreDirs());
 			
 			List<File> deleted = new ArrayList<File>();
 			List<File> created = new ArrayList<File>();
@@ -87,7 +93,7 @@ public class Main {
 				File f2 = revisedFiles.get(i);
 				File f1 = FileUtil.transformBasePath(revised, source, f2);
 				if (!f1.exists()) {
-					created.add(f1);
+					created.add(f2);
 				}
 			}
 			System.out.println("===============================================================");
@@ -98,7 +104,7 @@ public class Main {
 
 			// STEP 3: files in both, source and revised
 			System.out.println("===============================================================");
-			System.out.println("MODIFIED FILES, total " + common1.size());
+			System.out.println("MODIFIED FILES");
 			for (int i = 0; i < common1.size(); i++) {
 				
 				File originalFile = common1.get(i);

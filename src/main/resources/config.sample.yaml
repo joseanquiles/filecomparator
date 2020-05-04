@@ -1,5 +1,6 @@
 #
 # SAMPLE FILE
+# Don't use accents!
 #
 
 # project name and description (optional)
@@ -17,6 +18,10 @@ ignore-files:
 - class
 - docx
 - doc
+
+# list of ignored directories
+ignore-dirs:
+- ./target
 
 # configuration for every file type
 file-types:
